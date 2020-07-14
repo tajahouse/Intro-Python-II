@@ -1,10 +1,11 @@
 from room import Room
+from player import Player
+import sys
 
 # Declare all the rooms
-
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                    "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -33,19 +34,43 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+directions={"n", "s", "e", "w"}
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
+def text_game():
+    name = "Endless Treasure Hunt"
+    player = Player(name, room['outside'])
+    print("Welcome to Endless Treasure Hunt. Would you like to play?")
 
+    user_input = input("Enter [P] to Start or [Q] to Quit:").lower().strip()
+
+    if user_input == "p":
+        name = input("What shall I call you Adventurer?:").upper().strip()
+        if name != '':
+            player.name = name
+        print(f"Time to start your journey {player.name}\nAt present you are at the {player.current_room.name}\nInfo: {player.current_room.description}\nTo start your journey choose a direction [N]/[S]/[E]/[W]")
+    elif user_input != "p":
+        print("Thanks for Playing! GoodBye UnKnown Adventurer!")
 # Write a loop that:
-#
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
-#
+    while user_input == "p":
+        choice = input("Which direction will you choose?:")
+        if choice.lower().strip() in directions:
+            player.move(choice)
+        elif choice == 'q':
+            print(f"Thanks for Playing! GoodBye Adventurer {player.name}!")
+            sys.exit()
 # If the user enters "q", quit the game.
+
+
+
+text_game()
