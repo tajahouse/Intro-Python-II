@@ -11,7 +11,7 @@ class Player:
     linked_room = self.current_room.other_rooms(direction)
     if linked_room is not None:
       self.current_room = linked_room
-      print(f"You have entered the {linked_room.name}\n{linked_room.description}")
+      print(f"\nAdventurer {self.name}:\nYou have entered the {linked_room.name}\n\nInfo:{linked_room.description}\n\nPlease choose an option: [N][S][E][W] or [Q] to Quit\n")
     else:
       print(f"That direction is not available. Try Again!!")
 

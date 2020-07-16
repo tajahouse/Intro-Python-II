@@ -2,6 +2,7 @@ from room import Room
 from player import Player
 import sys
 
+
 # Declare all the rooms
 room = {
     'outside':  Room("Outside Cave Entrance",
@@ -44,17 +45,17 @@ directions={"n", "s", "e", "w"}
 def text_game():
     name = "Endless Treasure Hunt"
     player = Player(name, room['outside'])
-    print("Welcome to Endless Treasure Hunt. Would you like to play?")
+    print("\nWelcome to Endless Treasure Hunt. Would you like to play?")
 
-    user_input = input("Enter [P] to Start or [Q] to Quit:").lower().strip()
+    user_input = input("\nEnter [P] to Start or [Q] to Quit: ").lower().strip()
 
     if user_input == "p":
-        name = input("What shall I call you Adventurer?:").upper().strip()
+        name = input("\nWhat shall I call you Adventurer?:").upper().strip()
         if name != '':
             player.name = name
-        print(f"Time to start your journey {player.name}\nAt present you are at the {player.current_room.name}\nInfo: {player.current_room.description}\nTo start your journey choose a direction [N]/[S]/[E]/[W]")
+        print(f"\nTime to start your journey Adventurer {player.name}:\n\nAt present you are at the {player.current_room.name}\nInfo: {player.current_room.description}\n\nTo start your journey choose a direction: [N]/[S]/[E]/[W] or [Q] to Quit\n\n")
     elif user_input != "p":
-        print("Thanks for Playing! GoodBye UnKnown Adventurer!")
+        print("\nThanks for Playing! GoodBye UnKnown Adventurer!")
 # Write a loop that:
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
@@ -67,7 +68,7 @@ def text_game():
         if choice.lower().strip() in directions:
             player.move(choice)
         elif choice == 'q':
-            print(f"Thanks for Playing! GoodBye Adventurer {player.name}!")
+            print(f"\nThanks for Playing! GoodBye Adventurer {player.name}!")
             sys.exit()
 # If the user enters "q", quit the game.
 
