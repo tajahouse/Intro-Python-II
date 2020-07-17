@@ -1,6 +1,8 @@
 from room import Room
 from player import Player
+from item import Item
 import sys
+
 
 
 # Declare all the rooms
@@ -36,6 +38,24 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 
+#Items
+item = {
+    'coins':  Item("Item: ~~[Money", "--Just a few lose coins to take to the tavern]~~"),
+    'tools':  Item("Item: ~~[Grappling hook", "--This might come in handy. It is very heavy]~~"),
+    'jewel': Item("Item: ~~[Gem", "--Next time you ask that stranger for information. He might be willing to help for this type of payment]~~"),
+    'torch': Item("Item: ~~[Torch", "--Let there be light. Is someone sneaking around? Why is this on the floor?!?]~~"),
+    'trap': Item("Item: ~~[Tripped Trap", "--An abandoned trap that has been tripped. If cleaned up it could be useful.]~~"),
+    'medallion': Item("Item: ~~[Medallion", "--It reflects light and glows slightly orange it may be magical. There is an inscription in an unknown language. Inscription:Hul werud ezes ulud egembelu owog. Kyul buol engumet ullyetuk.]~~ "),
+}
+
+
+
+room['foyer'].items = [str(item['coins']), str(item['trap'])]
+room['overlook'].items = [str(item['jewel']),str(item['medallion']),str(item['trap'])]
+room['narrow'].items = [str(item['jewel']), str(item['coins']), str(item['torch'])]
+room['treasure'].items = [str(item['tools'])]
+
+options = "\nOptions:\nInventory:[View]\nItem:[Take][Drop]\nDirections:[N][S][E][W]\nSystem:[Q] to Quit\n\n"
 directions={"n", "s", "e", "w"}
 #
 # Main
@@ -47,13 +67,13 @@ def text_game():
     player = Player(name, room['outside'])
     print("\nWelcome to Endless Treasure Hunt. Would you like to play?")
 
-    user_input = input("\nEnter [P] to Start or [Q] to Quit: ").lower().strip()
+    user_input = input("\nEnter [P] to Play or [Q] to Quit: ").lower().strip()
 
     if user_input == "p":
         name = input("\nWhat shall I call you Adventurer?:").upper().strip()
         if name != '':
             player.name = name
-        print(f"\nTime to start your journey Adventurer {player.name}:\n\nAt present you are at the {player.current_room.name}\nInfo: {player.current_room.description}\n\nTo start your journey choose a direction: [N]/[S]/[E]/[W] or [Q] to Quit\n\n")
+        print(f"\nTime to start your journey Adventurer {player.name}:\n\nAt present you are at the {player.current_room.name}\nInfo: {player.current_room.description}\n\nOptions:\nDirections:[N][S][E][W]\nSystem:[Q] to Quit\n\nTo start your journey choose a direction...")
     elif user_input != "p":
         print("\nThanks for Playing! GoodBye UnKnown Adventurer!")
 # Write a loop that:
@@ -63,13 +83,25 @@ def text_game():
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
-    while user_input == "p":
-        choice = input("Which direction will you choose?:")
-        if choice.lower().strip() in directions:
+    while user_input == 'p':
+        choice = input("Please choose an option:").lower().strip()
+        if choice in directions:
             player.move(choice)
+        elif choice == 'h':
+            print(f"{options}")
         elif choice == 'q':
             print(f"\nThanks for Playing! GoodBye Adventurer {player.name}!")
             sys.exit()
+
+        """ if choice.lower().strip()=='view':
+            return player.inventory()
+        if choice.lower().strip() =='take':
+            return player.take()
+        if choice.lower().strip() == 'drop'
+            return player.item.drop() """
+
+
+
 # If the user enters "q", quit the game.
 
 
