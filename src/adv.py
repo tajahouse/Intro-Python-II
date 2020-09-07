@@ -1,10 +1,11 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+        "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -20,6 +21,7 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
+
 
 
 # Link rooms together
@@ -39,6 +41,23 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+#a Since this will be a new player and will be the instance of the player class and room class, We will just need a function, not a class
+
+def treasure_game():
+    game_name = "Mansion Treasures"
+    player = Player(game_name, room['outside'])
+    print(f"You are now playing {game_name}.")
+
+
+    player_input = input("Ready to play? Y for yes, N for no. \n").upper().strip()
+    if player_input =="Y":
+        name = input("What would you like to be called?").lower().strip()
+        print(f"Nice to meet you {name}. You are currently {player.room_location.name}! \nHere is some info about where you are: {player.room_location.description}. \n Here you can move [N][S][E][W] or you can press [N] to quit...")
+    elif player_input == "N":
+        print("See you next time!")
+
+
+treasure_game()
 # Write a loop that:
 #
 # * Prints the current room name
