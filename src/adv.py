@@ -62,7 +62,9 @@ def treasure_game():
 
     player_input = input("Ready to play? Y for yes, Q for no. \n").upper().strip()
     if player_input =="Y":
-            name = input(f"What would you like to be called?").upper().strip()
+        global name #! Didn't work
+        name = input(f"What would you like to be called?").strip()
+
         #c May need to set conditions where player can't skip this step.. make it required?
 
             # try:
@@ -70,16 +72,21 @@ def treasure_game():
             # except:
             #     print('Input required')
 
-            print(f"\n\nNice to meet you {name}. You are currently {player.room_location.name}! \nHere is some info about where you are: {player.room_location.description}. \n Here you can move [N]orth, [S]outh, [E]ast, or [W]est... or you can press [Q] to quit.")
+        print(f"\n\nNice to meet you {name}. You are currently {player.room_location.name}! \nHere is some info about where you are: {player.room_location.description}. \n Here you can move [N]orth, [S]outh, [E]ast, or [W]est... or you can press [Q] to quit.")
 
 #b In my while loop, I will display the options of movement the player has, allow them to chose where they want to move, and display the information about that location. If the player inters a direction that is not possible, let them know.
-            while player_input == "Y":
-                    navigate = input("You can choose your direction\n").upper().strip()
+        while player_input == "Y":
+                    navigate = input("So, which direction would you like to go?\n").upper().strip()
                     if navigate in {"N", "S", "E", "W"}:
                         player.move(navigate)
                     elif navigate == "Q":
-                        print("See you next time! Come again {player.name}!")
+                        print("See you next time! Come again!")
+                        quit()
+                    if player.room_location.name == "Treasure Chamber":
+                        quit()
+                    
     elif player_input == "Q":
         print("See you next time!")
+        quit()
 
 treasure_game()
