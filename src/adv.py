@@ -25,11 +25,13 @@ earlier adventurers. The only exit is to the south."""),
 }
 
 # Items in the room
+#b Probably should come up with some more creative items lol
 items={
-    'item1': Item("test item: ~~[it1 ","--Something of item]~~")
+    'item1': Item("test item: it1 "," Something of item"),
+    'item2': Item("next item: it2 "," Something else of item")
 }
 
-room['foyer'].items = [items['item1']]
+room['foyer'].items = str(items['item1']), str(items['item2'])
 
 # Link rooms together
 
