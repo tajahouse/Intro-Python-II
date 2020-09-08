@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -71,7 +72,6 @@ def treasure_game():
             #     name = len(name) > 0           
             # except:
             #     print('Input required')
-
         print(f"\n\nNice to meet you {name}. You are currently {player.room_location.name}! \nHere is some info about where you are: {player.room_location.description}. \n Here you can move [N]orth, [S]outh, [E]ast, or [W]est... or you can press [Q] to quit.")
 
 #b In my while loop, I will display the options of movement the player has, allow them to chose where they want to move, and display the information about that location. If the player inters a direction that is not possible, let them know.

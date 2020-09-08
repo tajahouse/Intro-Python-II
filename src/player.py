@@ -6,8 +6,12 @@ class Player:
 
     def move(self, direction):
         room_schemas = self.room_location.room_movement(direction)
-        if room_schemas is not None:
+        if room_schemas is not None & len(self.room_location.list) < 0:
             self.room_location = room_schemas
             print (f"\n{self.name} : You are now in the {room_schemas.name} area...N \n{room_schemas.description}")
+        if room_schemas is not None & len(self.room_location.list) > 0:
+            self.room_location = room_schemas
+            print(f"\n{self.name} : You are now in the {room_schemas.name} area...N \n{room_schemas.description}...\nIn this room, you have {self.room_location.list}")
+
         else:
             print("Room not available. Choose another direction!")
